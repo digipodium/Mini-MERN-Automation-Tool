@@ -1,0 +1,31 @@
+.form-title{
+    font-style: bold;
+    text-align: center; 
+    padding-bottom:1px;
+}
+
+
+.main{
+    background: linear-gradient(rgb(247, 153, 234),rgb(127, 236, 127),rgb(110, 202, 248));
+    height: 60vh;
+    
+    
+}
+
+
+.logo{
+    width:70px;
+    position: relative;
+    left:5px;
+    top: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+ }   
+.signup-bg{
+    background: url(https://cdn1.vectorstock.com/i/1000x1000/37/25/stylish-email-background-vector-783725.jpg);
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+    
+}

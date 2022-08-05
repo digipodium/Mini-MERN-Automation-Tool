@@ -1,0 +1,19 @@
+.img-1{
+    background: url(https://static.thenounproject.com/png/2059162-200.png);
+    padding: 30px;
+}
+.img-2{
+    background: url(https://assets.materialup.com/uploads/378d2c84-810d-477a-802b-d495646b9c4e/preview.jpg);
+}
+.img-3{
+    background: url(https://c.neh.tw/thumb/f/720/comvecteezy377227.jpg);
+}
+.img-4{
+    background: url(https://cdn.techmesto.com/wp-content/uploads/2016/02/Clear-Caches-1.png);
+}
+.card-img{
+min-height: 250px;
+background-size: cover;
+background-position: center;
+width: 100%; 
+}
