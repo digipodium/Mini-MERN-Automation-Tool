@@ -1,6 +1,6 @@
 import React from 'react'
 import './dashboard.css';
-
+import { NavLink } from 'react-router-dom';
 const Dashboard = () => {
   return (
     <div>
@@ -44,12 +44,13 @@ const Dashboard = () => {
 </div>
           
             <h1>Upload Data</h1>
-          <a href="#!">
+          <a href="http://localhost:3000/sheet">
             <div class="mask" style={{backgroundColor: ''}}>
              
                 
               
             </div>
+       
             <div class="hover-overlay">
               <div class="mask" style={{backgroundColor: 'rgba(253, 253, 253, 0.15)'}}></div>
             </div>
@@ -57,19 +58,24 @@ const Dashboard = () => {
         </div>
       </div>
 
+
+
       <div class="col-lg-4 col-md-6 mb-3">
         <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
         <div class="img-2 card-img">
 
 </div>
-          
-            <h1> Send Email</h1>
-          <a href="#!">
+
+                                    
+         
+<h1> Send Email</h1>
+          <a href="http://localhost:3000/mailsender">
             <div class="mask" style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}>
               <div class="d-flex justify-content-start align-items-start h-100">
-               
+              
               </div>
             </div>
+             
             <div class="hover-overlay">
               <div class="mask" style={{backgroundColor: 'rgba(253, 253, 253, 0.15)'}}></div>
             </div>
