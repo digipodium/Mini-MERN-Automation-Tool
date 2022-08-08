@@ -2,6 +2,7 @@ import { Formik } from 'formik';
 import React from 'react';
 import Swal from 'sweetalert2';
  import './register.css';
+ import { NavLink } from 'react-router-dom';
 
 const Register = () => {
 
@@ -74,7 +75,7 @@ const userSubmit = async (formdata) =>{
              
              <form onSubmit={handleSubmit} >
             
-             <input value={values.fullname} onChange={handleChange} id="name" placeholder="Enter Fullname" className="form-control mb-4"/>
+             <input value={values.fullname} onChange={handleChange} id="fullname" placeholder="Enter Fullname" className="form-control mb-4"/>
              {/* <input value={values.age} onChange={handleChange} id="age" placeholder="Age" className="form-control mt-4"/> */}
              
              <input value={values.email} onChange={handleChange} id="email" placeholder="Enter Valid Email" className="form-control mb-4"/>
@@ -85,7 +86,8 @@ const userSubmit = async (formdata) =>{
              <br/>
 
              {/* type- button , submit, reset */}
-             <button type='submit' className='btn btn-lg btn-success mt-5'>REGISTER</button>
+             <NavLink className="nav-link" to="/ds">
+             <button type='submit' className='btn btn-lg btn-success mt-5'>REGISTER</button></NavLink>
 
              <br/>
             <br/>

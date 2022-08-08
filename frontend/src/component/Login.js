@@ -5,6 +5,7 @@
 import { Formik } from 'formik';
 import React from 'react';
 import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 // import './login.css';
 
 const Login = () => {
@@ -80,7 +81,12 @@ const Login = () => {
                                     <label className='mt-4'>Password</label>
                                     <input value={values.password} onChange={handleChange} id="password" type="password" className='form-control' />
                                 
+                                    <NavLink className="nav-link" to="/ds">
                                     <button className='btn btn-secondary mt-5'>Login Now</button>
+          </NavLink>
+     
+                                   
+                                    
 
                                 </form>
                             )}

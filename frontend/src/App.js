@@ -9,6 +9,7 @@ import SheetHandler from './component/SheetHandler';
 import Dashboard from './component/Dashboard';
 import Footer from './component/Footer';
 import Learmore from './component/Learmore';
+import MailSender from './component/MailSender';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route element={ <SheetHandler></SheetHandler>} path='/sheet'/>
       <Route element={ <Dashboard></Dashboard>} path='/ds'/>
       <Route element={ <Learmore></Learmore>} path='/learn'/>
+      <Route element={ <MailSender></MailSender>} path='/mailsender'/>
 
         </Routes>
         <Footer/>
