@@ -62,7 +62,7 @@ const AddContact = () => {
       }
       // document.getElementById('signout_button').style.visibility = 'visible';
       // document.getElementById('authorize_button').innerText = 'Refresh';
-      await listConnectionNames()
+      // await listConnectionNames()
     }
 
     if (gapi.client.getToken() === null) {
@@ -145,12 +145,14 @@ const AddContact = () => {
       })
   }
 
-  const batchCreateContacts = () => {}
+  const batchCreateContacts = () => {
+
+  }
   return (
     <div>
         <h1>Add COntacts</h1>
         <hr />
-        <button className='btn btn-primary' onClick={e => handleAuthClick}>Authorize</button>
+        <button className='btn btn-primary' onClick={handleAuthClick}>Authorize</button>
     </div>
   )
 }
