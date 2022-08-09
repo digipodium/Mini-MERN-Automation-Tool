@@ -3,7 +3,7 @@
 
 import React,{ useEffect, useState } from 'react';
 
-const addContact = () => {
+const AddContact = () => {
 
     const CLIENT_ID = "436370605107-a1a87949khjquees4o8m7cjeq3mpiu8b.apps.googleusercontent.com"
   const API_KEY = "AIzaSyAzn3wRxPV_2kiXaRFkE480vDCEoiq1Nak";
@@ -150,9 +150,9 @@ const addContact = () => {
     <div>
         <h1>Add COntacts</h1>
         <hr />
-
+        <button className='btn btn-primary' onClick={e => handleAuthClick}>Authorize</button>
     </div>
   )
 }
 
-export default addContact;
+export default AddContact;

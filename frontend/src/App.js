@@ -11,6 +11,7 @@ import Footer from "./component/Footer"
 import Learmore from "./component/Learmore"
 import MailSender from "./component/MailSender"
 import Dashboard2 from "./component/Dashboard2"
+import AddContact from "./component/addContacts"
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route element={<Dashboard></Dashboard>} path="/ds" />
           <Route element={<Learmore></Learmore>} path="/learn" />
           <Route element={<MailSender></MailSender>} path="/mailsender" />
-          <Route element={<Dashboard2 />} path="/dashboard" />
+          {/* <Route element={<Dashboard2 />} path="/dashboard" /> */}
+          <Route element={<AddContact />} path="/addcontact" />
         </Routes>
         <Footer />
       </BrowserRouter>
