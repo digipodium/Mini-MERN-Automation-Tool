@@ -32,6 +32,7 @@ const Register = () => {
         icon: "success",
         title: "Success!",
         text: "Thanks for Signing Up! ",
+        
       })
     } else {
       console.log("Failed")
