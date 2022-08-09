@@ -40,7 +40,11 @@ const Login = () => {
         title: "login successful",
         text: "You are Logged In",
       })
-      navigate("/ds")
+      res.json()
+      .then(data => {
+        sessionStorage.setItem('user', JSON.stringify(data));
+        navigate("/ds");
+      })
     } else if (res.status === 400) {
       Swal.fire({
         icon: "error",
