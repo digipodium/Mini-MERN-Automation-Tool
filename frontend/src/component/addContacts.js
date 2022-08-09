@@ -62,7 +62,7 @@ const AddContact = () => {
       }
       // document.getElementById('signout_button').style.visibility = 'visible';
       // document.getElementById('authorize_button').innerText = 'Refresh';
-      // await listConnectionNames()
+      await listConnectionNames()
     }
 
     if (gapi.client.getToken() === null) {
