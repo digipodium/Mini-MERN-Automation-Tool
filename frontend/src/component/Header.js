@@ -1,7 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import {  useNavigate } from "react-router-dom"
 
 const Header = () => {
+  const navigate = useNavigate();
+ 
+
   return (
     
 <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{backgroundImage:'url("https://5.imimg.com/data5/NY/KE/MY-28569131/bulk-sms-services-500x500.png") '}}>
@@ -53,6 +57,9 @@ const Header = () => {
           
           Sign up for free</NavLink>
         </button>
+
+       
+
         
       </div>
     </div>

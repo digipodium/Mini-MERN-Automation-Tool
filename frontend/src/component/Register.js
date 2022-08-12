@@ -2,10 +2,14 @@ import { Formik } from "formik"
 import React from "react"
 import Swal from "sweetalert2"
 import "./register.css"
-import { NavLink } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
+
 
 const Register = () => {
   //  1. submission function
+  
+  const navigate = useNavigate();
+
   const userSubmit = async (formdata) => {
     console.log(formdata)
 
@@ -34,6 +38,7 @@ const Register = () => {
         text: "Thanks for Signing Up! ",
         
       })
+      navigate("/ds");
     } else {
       console.log("Failed")
       Swal.fire({
@@ -84,6 +89,8 @@ const Register = () => {
                         id="email"
                         placeholder="Enter Valid Email"
                         className="form-control mb-4"
+                        required
+                        type="email"
                       />
                       <input
                         value={values.password}
@@ -92,10 +99,11 @@ const Register = () => {
                         placeholder="Enter Secure Password"
                         className="form-control mb-4"
                         type="password"
+                        required
                       />
 
-                      <input type="checkbox" />
-                      <label for="">I agree to the T&C</label>
+                      <input type="checkbox" required />
+                      <label for="" >I agree to the T&C</label>
                       <br />
 
                       {/* type- button , submit, reset */}
