@@ -12,18 +12,30 @@ import Learmore from "./component/Learmore"
 import MailSender from "./component/MailSender"
 import Dashboard2 from "./component/Dashboard2"
 import AddContact from "./component/addContacts"
+import { UserProvider } from "./userContext"
+import { useState } from "react"
+import Authorisor from "./component/Auth"
 
 function App() {
+
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')))
+  
   return (
     <div>
+      <UserProvider user = {currentUser}>
+
       <BrowserRouter>
         <Header />
         <Routes>
           <Route element={<Home></Home>} path="/" />
           <Route element={<Home></Home>} path="/homepage" />
-          <Route element={<Login></Login>} path="/loginpage" />
+          <Route element={<Login></Login>} path="/login" />
           <Route element={<Register></Register>} path="/signup" />
-          <Route element={<SheetHandler></SheetHandler>} path="/sheet" />
+          <Route element={
+            <Authorisor>
+              <SheetHandler></SheetHandler>
+            </Authorisor>
+          } path="/sheet" />
           <Route element={<Dashboard></Dashboard>} path="/ds" />
           <Route element={<Learmore></Learmore>} path="/learn" />
           <Route element={<MailSender></MailSender>} path="/mailsender" />
@@ -32,6 +44,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      </UserProvider>
     </div>
   )
 }

@@ -102,10 +102,10 @@ const AddContact = () => {
     }
     const connections = response.result.connections
     console.log(connections)
-    if (!connections || connections.length === 0) {
-      document.getElementById("content").innerText = "No connections found."
-      return
-    }
+    // if (!connections || connections.length === 0) {
+    //   document.getElementById("content").innerText = "No connections found."
+    //   return
+    // }
     // Flatten to string to display
     const output = connections.reduce((str, person) => {
       if (!person.names || person.names.length === 0) {

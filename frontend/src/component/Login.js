@@ -1,12 +1,15 @@
 import { Formik } from "formik"
-import React from "react"
+import React, { useContext } from "react"
 import Swal from "sweetalert2"
 import { NavLink, useNavigate } from "react-router-dom"
+import { UserContext } from "../userContext"
 // import './login.css';
 
 const Login = () => {
 
   const navigate = useNavigate();
+
+  const {setLoggedIn} = useContext(UserContext);
 
   const userSubmit = async (formdata) => {
     console.log(formdata)
@@ -32,6 +35,7 @@ const Login = () => {
       res.json()
       .then(data => {
         sessionStorage.setItem('user', JSON.stringify(data));
+        setLoggedIn(true);
         navigate("/ds");
       })
     } else if (res.status === 400) {
@@ -61,10 +65,11 @@ const Login = () => {
                   <hr />
 
                   <label className="mt-4">Email</label>
-                  <input value={values.email} onChange={handleChange} id="email" className="form-control" />
+                  <input value={values.email} onChange={handleChange} id="email" className="form-control"  required
+                        type="email"/>
 
                   <label className="mt-4">Password</label>
-                  <input value={values.password} onChange={handleChange} id="password" type="password" className="form-control" />
+                  <input value={values.password} onChange={handleChange} id="password" required type="password" className="form-control" />
 
                     <button className="btn btn-secondary mt-5">Login Now</button>
                 </form>
