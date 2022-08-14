@@ -69,39 +69,39 @@ const SheetHandler = () => {
   }
 
   const showShowSheetData = () => {
-    if(sheetData.length){
+    if (sheetData.length) {
       return <table className="table align-middle mb-0 bg-white">
-    <thead className="bg-light">
-      <tr>
-        {sheetData[0].map(heading => (
-        <th>{heading}</th>
-        ))
-        
-      }
-      </tr>
-    </thead>
-    <tbody>
-      {sheetData.map(col => (
+        <thead className="bg-light">
+          <tr>
+            {sheetData[0].map(heading => (
+              <th>{heading}</th>
+            ))
 
-      <tr>
-        {col.map(dat =>(
-        <td>
-          <div className="d-flex align-items-center">
-            
-            <div className="ms-3">
-              <p>{dat}</p>
-            </div>
-          </div>
-        </td>
-        ))}
-      </tr>
-      ))}
-      
-    </tbody>
-  </table>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {sheetData.map(col => (
+
+            <tr>
+              {col.map(dat => (
+                <td>
+                  <div className="d-flex align-items-center">
+
+                    <div className="ms-3">
+                      <p>{dat}</p>
+                    </div>
+                  </div>
+                </td>
+              ))}
+            </tr>
+          ))}
+
+        </tbody>
+      </table>
     }
-    
-  
+
+
   }
 
   const getContactsFromBackend = () => {

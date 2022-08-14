@@ -1,17 +1,25 @@
 /* global gapi */
 /* global google */
 
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AddContact = () => {
 
-    const CLIENT_ID = "436370605107-a1a87949khjquees4o8m7cjeq3mpiu8b.apps.googleusercontent.com"
+  const CLIENT_ID = "436370605107-a1a87949khjquees4o8m7cjeq3mpiu8b.apps.googleusercontent.com"
   const API_KEY = "AIzaSyAzn3wRxPV_2kiXaRFkE480vDCEoiq1Nak";
-  const url = "http://localhost:5000"
+  const url = "http://localhost:5000";
+
+  const [contactsToAdd, setContactsToAdd] = useState({
+    names : [],
+    numbers : []
+  })
 
   const contact = {
     phoneNumbers: [{ value: "87354657" }],
   }
+
+  const [contactData, setContactData] = useState([]);
+  const [selContact, setSelContact] = useState(null);
 
   // Discovery doc URL for APIs used by the quickstart
   const DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
@@ -122,6 +130,7 @@ const AddContact = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
+        setContactData(data);
       })
   }
 
@@ -148,11 +157,60 @@ const AddContact = () => {
   const batchCreateContacts = () => {
 
   }
+
+  const showData = () => {
+    return <table className="table align-middle mb-0 bg-white">
+        <thead className="bg-light">
+          <tr>
+            <td>Title</td>
+            <td>Created On</td>
+          </tr>
+        </thead>
+        <tbody>
+          {contactData.map(contact => (
+            <tr>
+                <td>{contact.title}</td>
+                <td>{contact.createdAt}</td>
+                <td>
+                  <button className='btn btn-primary' onClick={e => setSelContact(contact)}>Use This</button>
+                </td>
+                <td>
+                  <button className='btn btn-danger' onClick={e => {
+                    fetch(url+'/contact/delete/'+contact._id, {method : 'DELETE'})
+                    .then(res => {
+                      console.log(res.status);
+                      getContactsFromBackend();
+                    })
+                  }}>Delete</button>
+                </td>
+            </tr>
+          ))}
+
+        </tbody>
+      </table>
+  }
+
+  const contactField = () => {
+    if(selContact){
+      return <select className='form-control'>
+        {Object.keys(selContact.data).map(key => (
+          <option>
+            {key}
+          </option>
+        ))}
+      </select>
+    }
+  }
+
   return (
     <div>
-        <h1>Add COntacts</h1>
-        <hr />
-        <button className='btn btn-primary' onClick={handleAuthClick}>Authorize</button>
+      <h1>Add COntacts</h1>
+      <hr />
+      <button className='btn btn-primary' onClick={handleAuthClick}>Authorize</button>
+
+      {showData()}
+      {contactField()}
+
     </div>
   )
 }
