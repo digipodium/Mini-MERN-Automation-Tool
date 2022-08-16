@@ -7,6 +7,7 @@ const SheetHandler = () => {
 
   const [sheetData, setSheetData] = useState([])
   const [dataToStore, setDataToStore] = useState({})
+  const [contactData, setContactData] = useState([]);
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem("user")))
 
@@ -54,10 +55,13 @@ const SheetHandler = () => {
       /* Convert array of arrays */
       const data = utils.sheet_to_json(ws, { header: 1 })
       console.log(data)
-      setSheetData(data)
-      const [arr, field] = getFieldData(data, 2)
-      const tempObj = {}
-      tempObj[field] = arr
+      setSheetData(data);
+      let tempObj = {};
+      for(let i=0;i<data[0].length;i++){
+        const [arr, field] = getFieldData(data, i)
+        // tempObj = {};
+        tempObj[field] = arr;
+      }
       console.log(tempObj)
       setDataToStore({ ...tempObj })
       /* Update state */
@@ -68,6 +72,36 @@ const SheetHandler = () => {
 
   }
 
+  const showData = () => {
+    return <table className="table align-middle mb-0 bg-white">
+        <thead className="bg-light">
+          <tr>
+            <td>Title</td>
+            <td>Created On</td>
+          </tr>
+        </thead>
+        <tbody>
+          {contactData.map(contact => (
+            <tr>
+                <td>{contact.title}</td>
+                <td>{contact.createdAt}</td>
+                
+                <td>
+                  <button className='btn btn-danger' onClick={e => {
+                    fetch(url+'/contact/delete/'+contact._id, {method : 'DELETE'})
+                    .then(res => {
+                      console.log(res.status);
+                      getContactsFromBackend();
+                    })
+                  }}>Delete</button>
+                </td>
+            </tr>
+          ))}
+
+        </tbody>
+      </table>
+  }
+
   const showShowSheetData = () => {
     if (sheetData.length) {
       return <table className="table align-middle mb-0 bg-white">
@@ -76,7 +110,6 @@ const SheetHandler = () => {
             {sheetData[0].map(heading => (
               <th>{heading}</th>
             ))
-
             }
           </tr>
         </thead>
@@ -87,7 +120,6 @@ const SheetHandler = () => {
               {col.map(dat => (
                 <td>
                   <div className="d-flex align-items-center">
-
                     <div className="ms-3">
                       <p>{dat}</p>
                     </div>
@@ -100,8 +132,6 @@ const SheetHandler = () => {
         </tbody>
       </table>
     }
-
-
   }
 
   const getContactsFromBackend = () => {
@@ -109,6 +139,7 @@ const SheetHandler = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
+        setContactData(data);
       })
   }
 
@@ -126,6 +157,9 @@ const SheetHandler = () => {
         </button>
         <hr />
         {showShowSheetData()}
+
+        <hr />
+        {showData()}
       </div>
     </div>
   )

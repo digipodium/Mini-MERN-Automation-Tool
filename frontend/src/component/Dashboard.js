@@ -23,11 +23,25 @@ const Dashboard = () => {
     
 
       <section style={{ backgroundColor: "#eee" }}>
+       
         <div class="container py-5">
+        
           <h4 class="text-center mb-5">
             <strong>Choose any option</strong>
           </h4>
 
+          <div className="row">
+            <div className="col-md-4">
+              <div className="card">
+                <img src="" />
+                <div className="card-body">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
           <div class="row">
             <div class="col-lg-4 col-md-12 mb-3">
               <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
@@ -35,7 +49,7 @@ const Dashboard = () => {
 
                 <h1>Upload Data</h1>
             
-                  <div class="mask" style={{ backgroundColor: "" }}></div>
+                  <div class="mask" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}></div>
 
                   <div class="hover-overlay">
                     <Link to='/sheet'>
@@ -71,12 +85,12 @@ const Dashboard = () => {
 
                 <h1>Add Contacts</h1>
                 
-                  <div class="mask" style={{ backgroundColor: "" }}>
+                  <div class="mask" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
                     <div class="d-flex justify-content-start align-items-start h-100"></div>
                   </div>
                   <div class="hover-overlay">
                   <Link to='/addcontact'>
-                    <div class="mask" style={{ backgroundColor: "" }}>
+                    <div class="mask" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
 
                     </div>
                     </Link>
@@ -93,7 +107,7 @@ const Dashboard = () => {
 
                 <h1>Clean Data</h1>
                 <a href="#!">
-                  <div class="mask" style={{ backgroundColor: "" }}>
+                  <div class="mask" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
                     <div class="d-flex justify-content-start align-items-start h-100"></div>
                   </div>
                   <div class="hover-overlay">
@@ -104,6 +118,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        
       </section>
     </div>
   )
