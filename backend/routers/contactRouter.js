@@ -53,6 +53,19 @@ router.get('/getbyemail/:email', (req,res)=>{
 
 });
 
+router.get('/getbyuser/:userid', (req,res)=>{
+    Model.find({ addedBy : req.params.userid})
+    .then((result) => {
+        console.log(result);
+        res.json(result);
+    }).catch((err) => {
+        console.error(err);
+        res.status(500).json(err);
+        
+    });
+
+});
+
 // delete is request method
 router.delete('/delete/:id', (req,res)=>{ Model.findByIdAndDelete(req.params.id)
     .then((result) => {

@@ -9,6 +9,8 @@ const SheetHandler = () => {
   const [dataToStore, setDataToStore] = useState({})
   const [contactData, setContactData] = useState([]);
 
+  const [dataTitle, setDataTitle] = useState("");
+
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem("user")))
 
   const getFieldData = (data, num) => {
@@ -26,7 +28,7 @@ const SheetHandler = () => {
       method: "POST",
 
       body: JSON.stringify({
-        title: "Contact Data",
+        title: dataTitle,
         addedBy: currentUser._id,
         data: dataToStore,
         createdAt: new Date(),
@@ -36,7 +38,8 @@ const SheetHandler = () => {
       },
     })
 
-    console.log(res.status)
+    console.log(res.status);
+    getContactsFromBackend();
     // popup
   }
 
@@ -104,7 +107,14 @@ const SheetHandler = () => {
 
   const showShowSheetData = () => {
     if (sheetData.length) {
-      return <table className="table align-middle mb-0 bg-white">
+      return <div className="card mt-4">
+        <div className="card-header">
+          <h4 className="m-0">Excel Sheet Data</h4>
+        </div>
+        <div className="card-body">
+
+        
+      <table className="table align-middle mb-0 bg-white">
         <thead className="bg-light">
           <tr>
             {sheetData[0].map(heading => (
@@ -114,7 +124,7 @@ const SheetHandler = () => {
           </tr>
         </thead>
         <tbody>
-          {sheetData.map(col => (
+          {sheetData.slice(1).map(col => (
 
             <tr>
               {col.map(dat => (
@@ -131,11 +141,13 @@ const SheetHandler = () => {
 
         </tbody>
       </table>
+      </div>
+      </div>
     }
   }
 
   const getContactsFromBackend = () => {
-    fetch(url + "/contact/getall")
+    fetch(url + "/contact/getbyuser/"+currentUser._id)
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
@@ -148,18 +160,33 @@ const SheetHandler = () => {
   }, [])
 
   return (
-    <div>
+    <div className="main-bg">
       <h1 className="form-style">Welcome to Automation Tool</h1>
       <div className="container">
-        <input onChange={extractData} type="file" />
-        <button className="btn btn-primary" onClick={storeData}>
-          Store Data
-        </button>
-        <hr />
+        <div className="card mt-5">
+          <div className="card-header">
+            <h4 className="m-0">Upload Excel Sheet</h4>
+          </div>
+          <div className="card-body">
+            <div className="input-group">
+              <label htmlFor="sheet-upload" className="btn btn-link btn-lg"> <i class="fas fa-upload    "></i> Upload Sheet</label>
+              <input hidden id="sheet-upload" onChange={extractData} type="file" />
+              <input type="text" className="form-control" disabled={!Object.keys(dataToStore).length} onChange={e => setDataTitle(e.target.value)} />
+              <button className="btn btn-primary" disabled={!Object.keys(dataToStore).length} onClick={storeData}>Store Sheet Data</button>
+            </div>
+          </div>
+        </div>
         {showShowSheetData()}
-
-        <hr />
-        {showData()}
+        <div className="card mt-5">
+          <div className="card-header">
+            <h4 className="m-0">Existing Data</h4>
+          </div>
+          <div className="card-body">
+          {showData()}
+          </div>
+        </div>
+        
+        
       </div>
     </div>
   )

@@ -155,7 +155,48 @@ const AddContact = () => {
   }
 
   const batchCreateContacts = () => {
-
+    gapi.client.people.people
+    .batchCreateContacts({contacts: [
+      {
+        contactPerson: {
+          names: [
+            {
+              givenName: "John",
+              familyName: "Doe"
+            }
+          ],
+          phoneNumbers: [{ value: "87354657" }],
+        }
+      },
+      {
+        contactPerson: {
+          names: [
+            {
+              givenName: "Leon",
+              familyName: "Kennedy"
+            }
+          ],
+          phoneNumbers: [{ value: "87354657" }],
+        }
+      },
+      {
+        contactPerson: {
+          names: [
+            {
+              givenName: "Ada",
+              familyName: "Wong"
+            }
+          ],
+          phoneNumbers: [{ value: "87354657" }],
+        }
+      }
+    ]})
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
   }
 
   const showData = () => {
@@ -210,6 +251,7 @@ const AddContact = () => {
 
       {showData()}
       {contactField()}
+      <button className='btn btn-primary' onClick={batchCreateContacts}>Batch Create Contact</button>
 
     </div>
   )
