@@ -3,6 +3,7 @@ import React, { useContext } from "react"
 import Swal from "sweetalert2"
 import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from "../userContext"
+import { Link } from "react-router-dom";
 // import './login.css';
 
 const Login = () => {
@@ -70,8 +71,14 @@ const Login = () => {
 
                   <label className="mt-4">Password</label>
                   <input value={values.password} onChange={handleChange} id="password" required type="password" className="form-control" />
+                       
 
-                    <button className="btn btn-secondary mt-5">Login Now</button>
+                    <button className="btn btn-secondary mt-5 px-5">Login Now</button>
+                    
+                    
+                    
+                      <Link to="/signup">Don't have an account</Link>
+                      
                 </form>
               )}
             </Formik>
