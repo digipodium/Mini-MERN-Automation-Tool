@@ -15,6 +15,7 @@ import AddContact from "./component/addContacts"
 import { UserProvider } from "./userContext"
 import { useState } from "react"
 import Authorisor from "./component/Auth"
+import Notfound from "./component/Notfound"
 
 function App() {
 
@@ -36,11 +37,15 @@ function App() {
               <SheetHandler></SheetHandler>
             </Authorisor>
           } path="/sheet" />
-          <Route element={<Dashboard></Dashboard>} path="/ds" />
+          <Route element={
+          <Authorisor><Dashboard></Dashboard>
+          </Authorisor>
+        } path="/ds" />
           <Route element={<Learmore></Learmore>} path="/learn" />
           <Route element={<MailSender></MailSender>} path="/mailsender" />
           {/* <Route element={<Dashboard2 />} path="/dashboard" /> */}
           <Route element={<AddContact />} path="/addcontact" />
+          <Route element={ <Notfound /> } path="*" />
         </Routes>
         <Footer />
       </BrowserRouter>

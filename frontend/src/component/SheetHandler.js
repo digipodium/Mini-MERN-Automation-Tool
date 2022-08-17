@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { read, utils } from "xlsx"
+import { Link, useNavigate } from "react-router-dom"
 import "./sheetHandler.css"
 
 const SheetHandler = () => {
@@ -161,14 +162,21 @@ const SheetHandler = () => {
 
   return (
     <div className="main-bg">
-      <h1 className="form-style">Welcome to Automation Tool</h1>
+      
+      
+      <h1 className="form-style">
+      <img src="button.png" ></img>Welcome to Automation Tool</h1>
+      
       <div className="container">
         <div className="card mt-5">
           <div className="card-header">
             <h4 className="m-0">Upload Excel Sheet</h4>
           </div>
           <div className="card-body">
+
+            
             <div className="input-group">
+
               <label htmlFor="sheet-upload" className="btn btn-link btn-lg"> <i class="fas fa-upload    "></i> Upload Sheet</label>
               <input hidden id="sheet-upload" onChange={extractData} type="file" />
               <input type="text" className="form-control" disabled={!Object.keys(dataToStore).length} onChange={e => setDataTitle(e.target.value)} />
@@ -176,6 +184,14 @@ const SheetHandler = () => {
             </div>
           </div>
         </div>
+        <div class="hover-overlay">
+        <img src="mail.png"></img>
+                  <Link to="/mailsender">
+
+                    <div class="mask" style={{ backgroundColor: "rgba(253, 253, 253, 0.15)" }}></div>
+                  </Link>
+                </div>
+       
         {showShowSheetData()}
         <div className="card mt-5">
           <div className="card-header">

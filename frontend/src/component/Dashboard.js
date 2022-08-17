@@ -20,22 +20,43 @@ const Dashboard = () => {
                 <img src="upload_icon.png" alt="" />
                 <div className="card-body">
                   <h3 className="text-center">Sheet Manager</h3>
+
+                  <div class="hover-overlay">
+                  <Link to="/sheet">
+                    <div class="mask" style={{ backgroundColor: "rgba(253, 253, 253, 0.15)" }}></div>
+                  </Link>
+                </div>
+
                 </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card" onClick={e => navigate('/sheet')}>
-                <img src="upload_icon.png" alt="" />
+              <div className="card" onClick={e => navigate('/mailsender')}>
+                <img src="mail_icon.png" alt="" />
                 <div className="card-body">
-                  <h3 className="text-center">Sheet Manager</h3>
+                  <h3 className="text-center">Send Mail</h3>
+
+                  <div class="hover-overlay">
+                  <Link to="/mailsender">
+                    <div class="mask" style={{ backgroundColor: "rgba(253, 253, 253, 0.15)" }}></div>
+                  </Link>
+                </div>
+
                 </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card" onClick={e => navigate('/sheet')}>
-                <img src="upload_icon.png" alt="" />
+              <div className="card" onClick={e => navigate('/addcontact')}>
+                <img src="contact_icon.png" alt="" />
                 <div className="card-body">
-                  <h3 className="text-center">Sheet Manager</h3>
+                  <h3 className="text-center">Add Contacts</h3>
+              
+                  <div class="hover-overlay">
+                  <Link to="/addcontact">
+                    <div class="mask" style={{ backgroundColor: "rgba(253, 253, 253, 0.15)" }}></div>
+                  </Link>
+                </div>
+
                 </div>
               </div>
             </div>
