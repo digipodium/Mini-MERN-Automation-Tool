@@ -94,6 +94,7 @@ const AddContact = () => {
     }
   }
 
+  
   async function listConnectionNames() {
     let response
     try {
