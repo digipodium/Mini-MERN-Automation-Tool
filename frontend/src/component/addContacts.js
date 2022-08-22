@@ -1,25 +1,23 @@
 /* global gapi */
 /* global google */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import {Swal} from 'sweetalert2';
 
 const AddContact = () => {
-
   const CLIENT_ID = "436370605107-a1a87949khjquees4o8m7cjeq3mpiu8b.apps.googleusercontent.com"
-  const API_KEY = "AIzaSyAzn3wRxPV_2kiXaRFkE480vDCEoiq1Nak";
-  const url = "http://localhost:5000";
+  const API_KEY = "AIzaSyAzn3wRxPV_2kiXaRFkE480vDCEoiq1Nak"
+  const url = "http://localhost:5000"
 
-  const [contactsToAdd, setContactsToAdd] = useState({
-    names : [],
-    numbers : []
-  })
+  const [contactsToAdd, setContactsToAdd] = useState([]);
+  const [fieldsToAdd, setFieldsToAdd] = useState({});
 
   const contact = {
     phoneNumbers: [{ value: "87354657" }],
   }
 
-  const [contactData, setContactData] = useState([]);
-  const [selContact, setSelContact] = useState(null);
+  const [contactData, setContactData] = useState([])
+  const [selContact, setSelContact] = useState(null)
 
   // Discovery doc URL for APIs used by the quickstart
   const DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/people/v1/rest"
@@ -94,7 +92,6 @@ const AddContact = () => {
     }
   }
 
-  
   async function listConnectionNames() {
     let response
     try {
@@ -131,14 +128,14 @@ const AddContact = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
-        setContactData(data);
+        setContactData(data)
       })
   }
 
   useEffect(() => {
     gapiLoaded()
     gisLoaded()
-    getContactsFromBackend();
+    getContactsFromBackend()
   }, [])
 
   const createContact = () => {
@@ -156,52 +153,41 @@ const AddContact = () => {
   }
 
   const batchCreateContacts = () => {
+    let tempContacts = [];
+    for(let i=0;i<selContact.data[Object.keys(selContact.data)[0]].length;i++){
+      tempContacts.push({
+        contactPerson: {
+          names: [
+            {
+              givenName: selContact.data[fieldsToAdd.Name][i],
+              familyName: "",
+            },
+          ],
+          phoneNumbers: [{ value: ""+selContact.data[fieldsToAdd.Number][i] }],
+        },
+      })
+    }
+    console.log(tempContacts);
     gapi.client.people.people
-    .batchCreateContacts({contacts: [
-      {
-        contactPerson: {
-          names: [
-            {
-              givenName: "John",
-              familyName: "Doe"
-            }
-          ],
-          phoneNumbers: [{ value: "87354657" }],
-        }
-      },
-      {
-        contactPerson: {
-          names: [
-            {
-              givenName: "Leon",
-              familyName: "Kennedy"
-            }
-          ],
-          phoneNumbers: [{ value: "87354657" }],
-        }
-      },
-      {
-        contactPerson: {
-          names: [
-            {
-              givenName: "Ada",
-              familyName: "Wong"
-            }
-          ],
-          phoneNumbers: [{ value: "87354657" }],
-        }
-      }
-    ]})
-    .then(function (response) {
-      console.log(response)
-    })
-    .catch(function (err) {
-      console.log(err)
-    })
+      .batchCreateContacts({
+        contacts: tempContacts,
+      })
+      .then(function (response) {
+        console.log(response)
+        Swal.fire({
+          icon : 'success',
+          title : 'Contacts Added',
+          text : 'Contacts have been to your Google Account'
+        })
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
   }
 
   const showData = () => {
-    return <table className="table align-middle mb-0 bg-white">
+    return (
+      <table className="table align-middle mb-0 bg-white">
         <thead className="bg-light">
           <tr>
             <td>Title</td>
@@ -209,53 +195,93 @@ const AddContact = () => {
           </tr>
         </thead>
         <tbody>
-          {contactData.map(contact => (
+          {contactData.map((contact) => (
             <tr>
-                <td>{contact.title}</td>
-                <td>{contact.createdAt}</td>
-                <td>
-                  <button className='btn btn-primary' onClick={e => setSelContact(contact)}>Use This</button>
-                </td>
-                <td>
-                  <button className='btn btn-danger' onClick={e => {
-                    fetch(url+'/contact/delete/'+contact._id, {method : 'DELETE'})
-                    .then(res => {
-                      console.log(res.status);
-                      getContactsFromBackend();
+              <td>{contact.title}</td>
+              <td>{contact.createdAt}</td>
+              <td>
+                <button className="btn btn-primary" onClick={(e) => setSelContact(contact)}>
+                  Use This
+                </button>
+              </td>
+              <td>
+                <button
+                  className="btn btn-danger"
+                  onClick={(e) => {
+                    fetch(url + "/contact/delete/" + contact._id, { method: "DELETE" }).then((res) => {
+                      console.log(res.status)
+                      getContactsFromBackend()
                     })
-                  }}>Delete</button>
-                </td>
+                  }}>
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
-
         </tbody>
       </table>
+    )
+  }
+
+  const updateContactField = (field, sheetField) => {
+    let tempFields = fieldsToAdd;
+    tempFields[field] = sheetField; 
+    setFieldsToAdd(tempFields);
+    console.log(fieldsToAdd);
+
+    
+
   }
 
   const contactField = () => {
-    if(selContact){
-      return <select className='form-control'>
-        {Object.keys(selContact.data).map(key => (
-          <option>
-            {key}
-          </option>
-        ))}
-      </select>
+    if (selContact) {
+      return (
+        <div className="card">
+          <div className="card-header">
+            <h4 className="m-0">Select the Correct Fields Form your sheet</h4>
+          </div>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-6">
+                <h3>Name</h3>
+                <select className="form-control" onChange={e => updateContactField('Name',e.target.value)}>
+                  {Object.keys(selContact.data).map((key) => (
+                    <option value={key}>{key}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="col-md-6">
+                <h3>Phone No.</h3>
+                <select className="form-control" onChange={e => updateContactField('Number',e.target.value)}>
+                  {Object.keys(selContact.data).map((key) => (
+                    <option>{key}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <button className="btn btn-primary mt-4" onClick={batchCreateContacts}>
+              Add Contacts
+            </button>
+          </div>
+        </div>
+      )
     }
   }
 
   return (
     <div>
-      <h1>Add COntacts</h1>
-      <hr />
-      <button className='btn btn-primary' onClick={handleAuthClick}>Authorize</button>
+      <div className="container">
+        <h1>Add COntacts</h1>
+        <hr />
+        <button className="btn btn-primary" onClick={handleAuthClick}>
+          Authorize
+        </button>
 
-      {showData()}
-      {contactField()}
-      <button className='btn btn-primary' onClick={batchCreateContacts}>Batch Create Contact</button>
-
+        {showData()}
+        {contactField()}
+      </div>
     </div>
   )
 }
 
-export default AddContact;
+export default AddContact

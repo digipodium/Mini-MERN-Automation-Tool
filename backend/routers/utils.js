@@ -7,13 +7,11 @@ const transporter = nodemailer.createTransport({
   port: 465, // true for 465, false for other ports
   host: "smtp.gmail.com",
   auth: {
-    user: "mariyamtariq27@gmail.com",
-    pass: "blrqtkytcegyojrj",
+    user: "mymmm656@gmail.com",
+    pass: "sxhpjdjfujlrgrze",
   },
   secure: true,
 });
-
-
 
 router.post('/sendmail', (req, res) => {
   const formdata = req.body;

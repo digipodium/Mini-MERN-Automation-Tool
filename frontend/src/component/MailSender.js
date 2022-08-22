@@ -69,7 +69,7 @@ const MailSender = () => {
     const res = await fetch("http://localhost:5000/util/sendmail", {
       method: "POST",
       body: JSON.stringify({
-        from: "mariyamtariq27@gmail.com", // sender address
+        from: "mymmm656@gmail.com", // sender address
         to: recAddress, // list of receivers
         subject: subject,
         html: letterContent,
