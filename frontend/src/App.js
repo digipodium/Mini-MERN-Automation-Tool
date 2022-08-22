@@ -16,6 +16,7 @@ import { UserProvider } from "./userContext"
 import { useState } from "react"
 import Authorisor from "./component/Auth"
 import Notfound from "./component/Notfound"
+import UserManager from "./component/UserManager"
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           <Route element={<MailSender></MailSender>} path="/mailsender" />
           {/* <Route element={<Dashboard2 />} path="/dashboard" /> */}
           <Route element={<AddContact />} path="/addcontact" />
+          <Route element={<UserManager />} path="/usermanager" />
           <Route element={ <Notfound /> } path="*" />
         </Routes>
         <Footer />
