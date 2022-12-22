@@ -15,7 +15,7 @@ const port = process.env.PORT || 5000
 
 // middleware
 app.use(express.json())
-app.use(cors({ origin: ["http://localhost:3000"] }))
+app.use(cors({ origin: ["http://localhost:3000", 'https://automation-tool.onrender.com'] }))
 
 app.use("/user", userRouter)
 app.use("/contact", contactRouter)
