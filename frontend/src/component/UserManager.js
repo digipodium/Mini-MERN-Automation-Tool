@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import app_config from "./config";
 
 const UserManager = () => {
   const [userArray, setUserArray] = useState([]);
@@ -7,13 +8,12 @@ const UserManager = () => {
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [updateFormData, setUpdateFormData] = useState(null);
-
-  const nums = [3, 5, 2, 1, 6];
+const url = app_config.api_url;
 
   const getDataFromBackend = async () => {
     setLoading(true);
 
-    const response = await fetch("http://localhost:5000/user/getall");
+    const response = await fetch(url+"/user/getall");
     const data = await response.json();
 
     console.log(data);
@@ -29,7 +29,7 @@ const UserManager = () => {
 
   const deleteUser = async (id) => {
     console.log(id);
-    const response = await fetch("http://localhost:5000/user/delete/" + id, {
+    const response = await fetch(url+"/user/delete/" + id, {
       method: "DELETE",
     });
 

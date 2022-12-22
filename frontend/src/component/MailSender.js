@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import app_config from './config';
 
 const MailSender = () => {
 
@@ -13,7 +14,7 @@ const MailSender = () => {
     JSON.parse(sessionStorage.getItem("user"))
   );
 
-  const url = "http://localhost:5000";
+  const url = app_config.api_url;
 
   const showData = () => {
     return <table className="table align-middle mb-0 bg-white">
@@ -66,7 +67,7 @@ const MailSender = () => {
   };
 
   const sendMail = async (recAddress) => {
-    const res = await fetch("http://localhost:5000/util/sendmail", {
+    const res = await fetch(url+"/util/sendmail", {
       method: "POST",
       body: JSON.stringify({
         from: "mymmm656@gmail.com", // sender address

@@ -5,9 +5,11 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from "../userContext"
 import { Link } from "react-router-dom"
 import './login.css';
+import app_config from "./config"
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const url = app_config.api_url;
 
   const { setLoggedIn } = useContext(UserContext)
 
@@ -16,7 +18,7 @@ const Login = () => {
 
     // fetch - url,request method, data, data format
 
-    const res = await fetch("http://localhost:5000/user/authenticate", {
+    const res = await fetch(url+"/user/authenticate", {
       method: "POST",
       body: JSON.stringify(formdata),
       headers: {

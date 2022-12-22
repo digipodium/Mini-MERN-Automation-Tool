@@ -3,12 +3,14 @@ import React from "react"
 import Swal from "sweetalert2"
 import "./register.css"
 import {  useNavigate } from "react-router-dom"
+import app_config from "./config"
 
 
 const Register = () => {
   //  1. submission function
   
   const navigate = useNavigate();
+  const url = app_config.api_url;
 
   const userSubmit = async (formdata) => {
     console.log(formdata)
@@ -20,7 +22,7 @@ const Register = () => {
 
     // await will execute this function synchronously
 
-    const response = await fetch("http://localhost:5000/user/add", {
+    const response = await fetch(url+"/user/add", {
       method: "POST",
       body: JSON.stringify(formdata),
       headers: {
