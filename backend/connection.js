@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-const db_name='MyMernDB';
-
-const db_url = `mongodb+srv://mariyam2724:mariyam2724@mycluster.4u93r.mongodb.net/${db_name}?retryWrites=true&w=majority`;
+const db_url = `mongodb+srv://mmm:mmm@cluster0.gvyon.mongodb.net/contactsautomation?retryWrites=true&w=majority`;
 
 // async function- will return promise
 mongoose.connect(db_url)

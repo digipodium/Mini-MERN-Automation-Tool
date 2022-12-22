@@ -1,3 +1,8 @@
 .login{
     margin: 8px;
 }
+
+.login-bg{
+    background: linear-gradient(#f799ea,#7fec7f,#6ecaf8);
+    height: 80vh;
+}
