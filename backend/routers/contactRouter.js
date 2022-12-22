@@ -1,6 +1,6 @@
 const express = require ('express');
 const router = express.Router();
-const Model=require('../Models/contactModel');
+const Model=require('../models/contactModel');
 
 //  save data smoothly on database
 router.post('/add', (req,res)=>{
